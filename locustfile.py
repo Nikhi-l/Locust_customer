@@ -1,37 +1,35 @@
-# Copyright 2015-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file
-# except in compliance with the License. A copy of the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is distributed on an "AS IS"
-# BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-# License for the specific language governing permissions and limitations under the License.
-
-import os
-import string
+import csv
 import random
-from locust import HttpLocust, TaskSet, task
+import warnings
+import os
 
-class MyTaskSet(TaskSet):
-    @task(1000)
-    def index(self):
-        response = self.client.get("/")
+from locust import HttpUser, task, between
 
-    # This task will 15 times for every 1000 runs of the above task
-    # @task(15)
-    # def about(self):
-    #     self.client.get("/blog")
+SEARCH_LINK = "/product_list_v2/?q={param}&ptype=P&mtype=1&panindia=0&pincode=226002&format=2&wh=2&salt_code=&token" \
+              "=7il9iil94il9oil97il9o7l&include_discontinued=1&strict_match=1&includeGiftable=1&fallback=0" \
+              "&csrf_test_name=f4cfa96ab9aee18162f46900e4694df6&_=1645763513346 "
+SEARCH_QUERIES = []
 
-    # This task will run once for every 1000 runs of the above task
-    # @task(1)
-    # def about(self):
-    #     id = id_generator()
-    #     self.client.post("/signup", {"email": "example@example.com", "name": "Test"})
 
-class MyLocust(HttpLocust):
-    host = os.getenv('TARGET_URL', "http://localhost")
-    task_set = MyTaskSet
-    min_wait = 45
-    max_wait = 50
+# for multiple users sending different queries
+
+class SastaSundarSearch(HttpUser):
+    host = os.getenv('TARGET_URL', 'https://search.sastasundar.com')
+    wait_time = between(1, 5)
+    def fetch_search_queries(self):
+        files = [open("found + retail-customer + all-devices + all-scope + (2022-02-01 to 2022-02-08).csv"),
+                 open("not-found + retail-customer + all-devices + all-scope + (2022-02-01 to 2022-02-08).csv")]
+        for file in files:
+            csv_reader = csv.reader(file)
+            for name in csv_reader:
+                SEARCH_QUERIES.append(name)
+
+    def on_start(self):
+        warnings.filterwarnings("ignore")
+        self.client.verify = False
+        self.fetch_search_queries()
+
+    @task
+    def sasta_sundar_search_query(self):
+        self.client.get(SEARCH_LINK.format(param=random.choice(SEARCH_QUERIES)))
+        # print(response.status_code)
