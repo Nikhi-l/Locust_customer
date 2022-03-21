@@ -14,3 +14,7 @@
 
 locust-master: /bin/bash -c "exec /usr/local/bin/locust -f locustfile.py  --master"
 locust-follower: /bin/bash -c "exec /usr/local/bin/locust -f locustfile.py --worker --master-host=$(<.masterIP)"
+locust-follower1: /bin/bash -c "exec /usr/local/bin/locust -f locustfile.py --worker --master-host=$(<.masterIP)"
+locust-follower2: /bin/bash -c "exec /usr/local/bin/locust -f locustfile.py --worker --master-host=$(<.masterIP)"
+locust-follower3: /bin/bash -c "exec /usr/local/bin/locust -f locustfile.py --worker --master-host=$(<.masterIP)"
+locust-follower4: /bin/bash -c "exec /usr/local/bin/locust -f locustfile.py --worker --master-host=$(<.masterIP)"
