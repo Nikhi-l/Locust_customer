@@ -28,7 +28,7 @@ header = {
 }
 
 class SastaSundarCheckout(HttpUser):
-    host = os.getenv('TARGET_URL', 'https://catalog.sastasundar.com')
+    host = os.getenv('TARGET_URL', '')
 
     def on_start(self):
         warnings.filterwarnings("ignore")
@@ -36,4 +36,4 @@ class SastaSundarCheckout(HttpUser):
 
     @task
     def sasta_sundar_search_query(self):
-        self.client.post("/home/getmasterhomewidgets", headers=header, data=body)
+        self.client.post("https://catalog.sastasundar.com/home/getmasterhomewidgets", headers=header, data=body)
