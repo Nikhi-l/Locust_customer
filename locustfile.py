@@ -16,7 +16,7 @@ SEARCH_QUERIES = []
 # for multiple users sending different queries
 
 class SastaSundarSearch(HttpUser):
-    host = os.getenv('TARGET_URL', 'https://stage-search.sastasundar.com')
+    host = os.getenv('TARGET_URL', 'https://search.sastasundar.com')
     wait_time = between(1, 5)
     def fetch_search_queries(self):
         files = [open("found + retail-customer + all-devices + all-scope + (2022-02-01 to 2022-02-08).csv"),
