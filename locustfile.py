@@ -12,9 +12,10 @@ SEARCH_LINK = "/search?q={param}"
 
 
 class SastaSundarSearch(HttpUser):
-    host = os.getenv('TARGET_URL', 'https://search.sastasundar.com')
+    host = os.getenv('TARGET_URL', 'https://stage-search.sastasundar.com')
     wait_time = between(1, 5)
     SEARCH_QUERIES = []
+
     def fetch_search_queries(self):
         files = [open("found + retail-customer + all-devices + all-scope + (2022-02-01 to 2022-02-08).csv"),
                  open("not-found + retail-customer + all-devices + all-scope + (2022-02-01 to 2022-02-08).csv")]
