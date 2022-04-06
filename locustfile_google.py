@@ -7,7 +7,7 @@ from locust import HttpUser, task, between
 
 
 class SastaSundarCheckout(HttpUser):
-    host = os.getenv('TARGET_URL', 'https://api.ipify.org')
+    host = os.getenv('TARGET_URL', 'http://www.7timer.info')
 
     def on_start(self):
         warnings.filterwarnings("ignore")
@@ -15,4 +15,4 @@ class SastaSundarCheckout(HttpUser):
 
     @task
     def sasta_sundar_search_query(self):
-        self.client.get("/?format=json")
+        self.client.get("/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=json")
