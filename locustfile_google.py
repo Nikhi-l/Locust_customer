@@ -7,7 +7,7 @@ from locust import HttpUser, task, between
 
 
 class SastaSundarCheckout(HttpUser):
-    host = os.getenv('TARGET_URL', 'https://api.ipify.org')
+    host = os.getenv('TARGET_URL', 'http://sample-go-service-dev.ap-south-1.elasticbeanstalk.com')
 
 
     def on_start(self):
@@ -16,4 +16,4 @@ class SastaSundarCheckout(HttpUser):
 
     @task
     def sasta_sundar_search_query(self):
-        self.client.get("/?format=json")
+        self.client.get("/")
