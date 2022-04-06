@@ -7,7 +7,7 @@ from locust import HttpUser, task, between
 
 
 class SastaSundarCheckout(HttpUser):
-    host = os.getenv('TARGET_URL', 'https://www.google.com')
+    host = os.getenv('TARGET_URL', 'https://api.ipify.org')
 
     def on_start(self):
         warnings.filterwarnings("ignore")
@@ -15,4 +15,4 @@ class SastaSundarCheckout(HttpUser):
 
     @task
     def sasta_sundar_search_query(self):
-        self.client.get("/")
+        self.client.get("/?format=json")
