@@ -22,6 +22,7 @@ class SastaSundarCheckout(HttpUser):
     def on_start(self):
         warnings.filterwarnings("ignore")
         self.client.verify = False
+        self.fetch_search_queries()
 
     @task
     def sasta_sundar_search_query(self):
