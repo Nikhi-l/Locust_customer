@@ -3,7 +3,7 @@ import random
 import warnings
 import os
 
-from locust import HttpUser, task, between
+from locust import FastHttpUser, task, between
 
 body = {
   "page":1,
@@ -27,8 +27,8 @@ header = {
     "User-Agent": "okhttp/5.0.0-alpha.2"
 }
 
-class SastaSundarCheckout(HttpUser):
-    host = os.getenv('TARGET_URL', '')
+class SastaSundarCheckout(FastHttpUser):
+    host = os.getenv('TARGET_URL', 'https://catalog.sastasundar.com')
 
     def on_start(self):
         warnings.filterwarnings("ignore")
@@ -36,4 +36,5 @@ class SastaSundarCheckout(HttpUser):
 
     @task
     def sasta_sundar_search_query(self):
-        self.client.post("https://catalog.sastasundar.com/home/getmasterhomewidgets", headers=header, data=body)
+        self.client.post("/home/getmasterhomewidgets", headers=header, data=body)
+        self.client.cookies.clear()
