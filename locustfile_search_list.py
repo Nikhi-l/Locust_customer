@@ -11,7 +11,6 @@ SEARCH_LINKS = ["/search_list?q=dettol&env=d", "/search_list?q=honey&env=d", "/s
 
 class SastaSundarSearch(HttpUser):
     host = os.getenv('TARGET_URL', 'https://search.sastasundar.com')
-    wait_time = between(1, 5)
 
     def on_start(self):
         warnings.filterwarnings("ignore")
