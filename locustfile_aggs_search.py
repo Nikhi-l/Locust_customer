@@ -11,7 +11,6 @@ SEARCH_LINKS = ["/aggs_search?MfgGroup=dettol", "/aggs_search?MfgGroup=dettol", 
 
 class SastaSundarSearch(HttpUser):
     host = os.getenv('TARGET_URL', 'https://search.sastasundar.com')
-    wait_time = between(1, 5)
 
     def on_start(self):
         warnings.filterwarnings("ignore")
