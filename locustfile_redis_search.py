@@ -3,11 +3,11 @@ import os
 
 from locust import HttpUser, task, between
 
-SEARCH_LINK = ""
+SEARCH_LINK = "/search_reserved_keyword?q=best-deal&aggregated=1&token=&device=5&wh=1&panindia=0&pincode=700102&exclude_items=1&page=2&size=1"
 
 
 class SastaSundarSearch(HttpUser):
-    host = os.getenv('TARGET_URL', 'https://search.sastasundar.com/search_reserved_keyword?q=best-deal&aggregated=1&token=&device=5&wh=1&panindia=0&pincode=700102&exclude_items=1&page=2&size=1')
+    host = os.getenv('TARGET_URL', 'https://search.sastasundar.com')
 
     def on_start(self):
         warnings.filterwarnings("ignore")
