@@ -23,7 +23,8 @@ body = {
 
 class SastaSundarCheckout(FastHttpUser):
     host = os.getenv('TARGET_URL', 'https://catalog.sastasundar.com')
-
+    network_timeout = 5.0
+    connection_timeout = 5.0
     def on_start(self):
         warnings.filterwarnings("ignore")
         self.client.verify = False
