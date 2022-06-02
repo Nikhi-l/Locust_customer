@@ -5,11 +5,11 @@ import os
 
 from locust import HttpUser, task, between
 
-SEARCH_LINK = "/nfr_redis.php?key={param}"
+SEARCH_LINK = "/sastasundar/nfr_redis.php?key={param}"
 
 
 class SastaSundarSearch(HttpUser):
-    host = os.getenv('TARGET_URL', 'https://healthplus.flipkart.com')
+    host = os.getenv('TARGET_URL', 'https://api.sastasundar.com')
     SEARCH_QUERIES = []
     network_timeout = 5.0
     connection_timeout = 5.0
