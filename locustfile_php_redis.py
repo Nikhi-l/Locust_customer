@@ -5,16 +5,14 @@ import os
 
 from locust import HttpUser, task, between
 
-
 SEARCH_LINK = "/nfr_redis?key={param}"
-
-
 
 
 class SastaSundarSearch(HttpUser):
     host = os.getenv('TARGET_URL', 'https://healthplus.flipkart.com')
-    wait_time = between(1, 5)
     SEARCH_QUERIES = []
+    network_timeout = 5.0
+    connection_timeout = 5.0
 
     def fetch_search_queries(self):
         for i in range(1, 51):
