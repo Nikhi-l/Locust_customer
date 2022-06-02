@@ -12,5 +12,5 @@
 # locust-master: /bin/bash -c "exec /usr/local/bin/locust -f locustfile.py --master-port=9876 --master"
 # locust-follower: /bin/bash -c "exec /usr/local/bin/locust -f locustfile.py --master-port=9876 --worker --master-host=$(<.masterIP)"
 
-locust-master: /bin/bash -c "exec /usr/local/bin/locust -f ${LOCUSTFILE_NAME}.py --master"
-locust-follower: /bin/bash -c "exec /usr/local/bin/locust -f ${LOCUSTFILE_NAME}.py --worker --master-host=$(<.masterIP)"
+locust-master: /bin/bash -c "exec /usr/local/bin/locust -f ${LOCUSTFILE_NAME} --master"
+locust-follower: /bin/bash -c "exec /usr/local/bin/locust -f ${LOCUSTFILE_NAME} --worker --master-host=$(<.masterIP)"
