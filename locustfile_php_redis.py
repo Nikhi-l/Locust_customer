@@ -5,7 +5,7 @@ import os
 
 from locust import HttpUser, task, between
 
-SEARCH_LINK = "/nfr_redis?key={param}"
+SEARCH_LINK = "/nfr_redis.php?key={param}"
 
 
 class SastaSundarSearch(HttpUser):
