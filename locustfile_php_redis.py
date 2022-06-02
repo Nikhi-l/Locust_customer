@@ -15,7 +15,7 @@ class SastaSundarSearch(HttpUser):
     connection_timeout = 5.0
 
     def fetch_search_queries(self):
-        for i in range(1, 51):
+        for i in range(1, 7):
             self.SEARCH_QUERIES.append(str("nfr_" + str(i)))
 
     def on_start(self):
