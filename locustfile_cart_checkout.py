@@ -89,6 +89,13 @@ header_cart_checkout = {
 
 body_cart_checkout = {"products": [{"product_id": "9841", "quantity": 1, "ref_id": ""}]}
 
+def get_mobile_number():
+    no = ""
+    for i in range(0, 10):
+        x = random.randint(0,9)
+        no = no + str(x)
+    return no
+
 
 class SastaSundarSearch(HttpUser):
     host = os.getenv('TARGET_URL', '')
@@ -110,10 +117,12 @@ class SastaSundarSearch(HttpUser):
         self.login()
 
     def login(self):
+        body_get_otp["Params"]["MobileNo"] = get_mobile_number()
+        body_verify_otp["Params"]["MobileNo"] = body_get_otp["Params"]["MobileNo"]
         response = self.client.post(
             "https://fkhp-preprod-api.sastasundar.com/sastasundar/customer/rest_customer/postData", json=body_get_otp)
         if response.status_code == 200:
-            # print(response.text)
+            print(response.text)
             json_response = response.json()
             body_verify_otp["Params"]["OTP"] = json_response["ResponseData"]["data"]
             response = self.client.post(
@@ -122,7 +131,7 @@ class SastaSundarSearch(HttpUser):
             )
             json_response = response.json()
             if json_response["ResponseData"].get("data", {}) != {}:
-                # print(response.text)
+                print(response.text)
                 header_cart_checkout["userid"] = str(json_response["ResponseData"]["data"]["UserId"])
                 header_cart_checkout["deviceid"] = json_response["AppHeader"]["DeviceId"]
                 # print("Logged In")
