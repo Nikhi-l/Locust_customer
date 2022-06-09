@@ -18,14 +18,13 @@ smallcase_char = "abcdefghijklmnopqrstuvwxyz"
 
 class SastaSundarSearch(HttpUser):
     host = os.getenv('TARGET_URL', '')
-    wait_time = between(1, 5)
     SEARCH_QUERIES = []
 
     def get_mobile_number(self):
         no = ""
         for i in range(0, 10):
             x = random.randint(5, 9)
-            no = no + str(x)
+            no = no + str(x)g
         return no
 
     def get_device_id(self):
