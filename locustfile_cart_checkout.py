@@ -24,7 +24,7 @@ class SastaSundarSearch(HttpUser):
         no = ""
         for i in range(0, 10):
             x = random.randint(5, 9)
-            no = no + str(x)g
+            no = no + str(x)
         return no
 
     def get_device_id(self):
